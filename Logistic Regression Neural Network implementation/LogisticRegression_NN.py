@@ -24,11 +24,11 @@ index = 11
 plt.imshow(train_set_x_orig[index])
 print ("y = " + str(train_set_y[:, index]) + ", it's a '" + classes[np.squeeze(train_set_y[:, index])].decode("utf-8") +  "' picture.")
 
-### START CODE HERE ### (≈ 3 lines of code)
+
 m_train = train_set_x_orig.shape[0]
 m_test = test_set_x_orig.shape[0]
 num_px = train_set_x_orig.shape[1]
-### END CODE HERE ###
+
 
 print ("Number of training examples: m_train = " + str(m_train))
 print ("Number of testing examples: m_test = " + str(m_test))
@@ -41,10 +41,10 @@ print ("test_set_y shape: " + str(test_set_y.shape))
 
 # Reshape the training and test examples
 
-### START CODE HERE ### (≈ 2 lines of code)
+
 train_set_x_flatten = train_set_x_orig.reshape(train_set_x_orig.shape[0], -1).T
 test_set_x_flatten = test_set_x_orig.reshape(test_set_x_orig.shape[0], -1).T
-### END CODE HERE ###
+
 
 print ("train_set_x_flatten shape: " + str(train_set_x_flatten.shape))
 print ("train_set_y shape: " + str(train_set_y.shape))
@@ -71,9 +71,9 @@ def sigmoid(z):
     s -- sigmoid(z)
     """
 
-    ### START CODE HERE ### (≈ 1 line of code)
+    
     s = 1/(1+np.exp(-z))
-    ### END CODE HERE ###
+    
     
     return s
 
@@ -92,11 +92,11 @@ def initialize_with_zeros(dim):
     b -- initialized scalar (corresponds to the bias)
     """
     
-    ### START CODE HERE ### (≈ 1 line of code)
+    
     w = np.zeros((dim, 1))
     #print(dim)
     b = 0
-    ### END CODE HERE ###
+
 
     assert(w.shape == (dim, 1))
     assert(isinstance(b, float) or isinstance(b, int))
@@ -128,16 +128,16 @@ def propagate(w, b, X, Y):
     m = X.shape[1]
     
     # FORWARD PROPAGATION (FROM X TO COST)
-    ### START CODE HERE ### (≈ 2 lines of code)
+    
     A = sigmoid(np.dot(w.T, X) + b)                                     # compute activation
     cost = -(np.sum(Y*np.log(A) + (1-Y)*np.log(1-A)))/m                                  # compute cost
-    ### END CODE HERE ###
+    
     
     # BACKWARD PROPAGATION (TO FIND GRAD)
-    ### START CODE HERE ### (≈ 2 lines of code)
+    
     dw = (np.dot(X, (A-Y).T))/m
     db = (np.sum(A-Y))/m
-    ### END CODE HERE ###
+    
 
     assert(dw.shape == w.shape)
     assert(db.dtype == float)
@@ -182,19 +182,19 @@ def optimize(w, b, X, Y, num_iterations, learning_rate, print_cost = False):
         
         
         # Cost and gradient calculation (≈ 1-4 lines of code)
-        ### START CODE HERE ### 
+        
         grads, cost = propagate(w, b, X, Y)
-        ### END CODE HERE ###
+        
         
         # Retrieve derivatives from grads
         dw = grads["dw"]
         db = grads["db"]
         
         # update rule (≈ 2 lines of code)
-        ### START CODE HERE ###
+        
         w = w - learning_rate*dw
         b = b - learning_rate*db
-        ### END CODE HERE ###
+        
         
         # Record the costs
         if i % 100 == 0:
@@ -233,20 +233,20 @@ def predict(w, b, X):
     w = w.reshape(X.shape[0], 1)
     
     # Compute vector "A" predicting the probabilities of a cat being present in the picture
-    ### START CODE HERE ### (≈ 1 line of code)
+    
     A = sigmoid(np.dot(w.T, X) + b)
-    ### END CODE HERE ###
+    
     
     #print(A.shape)
     """for i in range(A.shape[1]):
         
         # Convert probabilities A[0,i] to actual predictions p[0,i]
-        ### START CODE HERE ### (≈ 4 lines of code)
+        
         if A[0, i] > 0.5:
             Y_prediction[0, i] = 1
         else:
-            Y_prediction[0, i] = 0
-        ### END CODE HERE ###"""
+            Y_prediction[0, i] = 0"""
+        
     
     Y_prediction = np.where(A > 0.5 , 1.0, 0.0)
     
@@ -275,7 +275,7 @@ def model(X_train, Y_train, X_test, Y_test, num_iterations = 2000, learning_rate
     d -- dictionary containing information about the model.
     """
     
-    ### START CODE HERE ###
+    
     
     # initialize parameters with zeros (≈ 1 line of code)
     #print(X_train.shape)
@@ -292,7 +292,7 @@ def model(X_train, Y_train, X_test, Y_test, num_iterations = 2000, learning_rate
     Y_prediction_test = predict(w, b, X_test)
     Y_prediction_train = predict(w, b, X_train)
 
-    ### END CODE HERE ###
+    
 
     # Print train/test Errors
     print("train accuracy: {} %".format(100 - np.mean(np.abs(Y_prediction_train - Y_train)) * 100))
