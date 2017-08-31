@@ -114,6 +114,8 @@ def forward_propagation(X, parameters):
     # Implement Forward Propagation to calculate A2 (probabilities)
     
     Z1 = np.dot(W1, X) + b1
+    #ReLU Activation function
+    #A1 = np.maximum(0, Z1)
     A1 = np.tanh(Z1)
     Z2 = np.dot(W2, A1) + b2
     A2 = sigmoid(Z2)
@@ -193,6 +195,8 @@ def backward_propagation(parameters, cache, X, Y):
     dZ2= A2 - Y
     dW2 = (np.dot(dZ2, A1.T))/m
     db2 = (np.sum(dZ2, axis=1, keepdims = True))/m
+    #dg_dash = np.where(A1>0, 1, 0) This is for ReLU activation instead TanH
+    #dZ1 = (np.dot(W2.T, dZ2)) * dg_dash
     dZ1 = (np.dot(W2.T, dZ2)) * (1-np.power(A1, 2))
     dW1 = (np.dot(dZ1, X.T))/m
     db1 = (np.sum(dZ1, axis=1, keepdims = True))/m
