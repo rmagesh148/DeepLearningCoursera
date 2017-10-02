@@ -21,19 +21,19 @@ def linear_function():
     
     np.random.seed(1)
     
-    ### START CODE HERE ### (4 lines of code)
+    
     X = tf.constant(np.random.randn(3, 1), name = "X")
     W = tf.constant(np.random.randn(4, 3), name = "W")
     b = tf.constant(np.random.randn(4, 1), name = "b")
     Y = tf.add(tf.matmul(W, X), b)
-    ### END CODE HERE ### 
+    
     
     # Create the session using tf.Session() and run it with sess.run(...) on the variable you want to calculate
     
-    ### START CODE HERE ###
+    
     sess = tf.Session()
     result = sess.run(Y)
-    ### END CODE HERE ### 
+    
     
     # close the session 
     sess.close()
@@ -53,7 +53,7 @@ def sigmoid(z):
     results -- the sigmoid of z
     """
     
-    ### START CODE HERE ### ( approx. 4 lines of code)
+    
     # Create a placeholder for x. Name it 'x'.
     x = tf.placeholder(tf.float32, name = "x")
 
@@ -66,7 +66,7 @@ def sigmoid(z):
         # Run session and call the output "result"
         result = sess.run(sigmoid, feed_dict = {x:z})
     
-    ### END CODE HERE ###
+    
     
     return result
 
@@ -87,10 +87,8 @@ def cost(logits, labels):
     cost -- runs the session of the cost (formula (2))
     """
     
-    ### START CODE HERE ### 
     
-    #print(logits.shape)
-    #print(labels.shape)
+    
     
     # Create the placeholders for "logits" (z) and "labels" (y) (approx. 2 lines)
     z = tf.placeholder(tf.float32, name = "z")
@@ -108,7 +106,7 @@ def cost(logits, labels):
     # Close the session (approx. 1 line). See method 1 above.
     sess.close()
     
-    ### END CODE HERE ###
+    
     
     return cost
 
@@ -128,7 +126,7 @@ def one_hot_matrix(labels, C):
     one_hot -- one hot matrix
     """
     
-    ### START CODE HERE ###
+    
     
     # Create a tf.constant equal to C (depth), name it 'C'. (approx. 1 line)
     C = tf.constant(C, name = "C")
@@ -145,7 +143,7 @@ def one_hot_matrix(labels, C):
     # Close the session (approx. 1 line). See method 1 above.
     sess.close()
     
-    ### END CODE HERE ###
+    
     
     return one_hot
 
@@ -162,7 +160,7 @@ def ones(shape):
     ones -- array containing only ones
     """
     
-    ### START CODE HERE ###
+    
     
     # Create "ones" tensor using tf.ones(...). (approx. 1 line)
     ones = tf.ones(shape)
@@ -176,6 +174,6 @@ def ones(shape):
     # Close the session (approx. 1 line). See method 1 above.
     sess.close()
     
-    ### END CODE HERE ###
+    
     return ones
 
